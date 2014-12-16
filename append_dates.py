@@ -7,8 +7,8 @@ def daterange(start_date, end_date):
 	for n in range(int ((end_date - start_date).days)):
 		yield start_date + datetime.timedelta(n)
 
-start_date = datetime.date(2014,5,2)
-end_date = datetime.date(2014,12,1)
+start_date = datetime.date(2011,8,1)
+end_date = datetime.date(2012,1,1)
 for single_date in daterange(start_date, end_date):
 	driver = ogr.GetDriverByName('ESRI Shapefile')
 	filename = time.strftime("nws_precip_1day_observed_%Y%m%d.shp", single_date.timetuple())
