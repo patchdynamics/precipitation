@@ -13,22 +13,24 @@ def daterange(start_date, end_date):
 
 # nws_precip_1day_observed_shape_20140101.tar.gz
 
-start_date = datetime.date(2012,1,1)
-end_date = datetime.date(2013,1,1)
+start_date = datetime.date(2013,1,15)
+end_date = datetime.date(2015,1,1)
+downloads_folder = "downloads_2013/" # needs final slash
+shapes_folder = "shapes_2013/" # needs final slash
 for single_date in daterange(start_date, end_date):
 	download_url = time.strftime("http://water.weather.gov/precip/p_download_new/%Y/%m/%d/nws_precip_1day_observed_shape_%Y%m%d.tar.gz", single_date.timetuple())
 	print download_url
-	wget.download(download_url, 'downloads_2011')
+	wget.download(download_url, downloads_folder)
 
 	filename = time.strftime("nws_precip_1day_observed_shape_%Y%m%d.tar.gz", single_date.timetuple())
-	path = "downloads_2012/"+filename
+	path = downloads_folder+filename
 
 	tar = tarfile.open(path)
-	tar.extractall('shapes_2012')
+	tar.extractall(shapes_folder)
 	tar.close()
 
 	filename = time.strftime("nws_precip_1day_observed_%Y%m%d.shp", single_date.timetuple())
-	path = "shapes_2012/"+filename
+	path = shapes_folder+filename
 
 	# and append the date of the file to the shapes
 	driver = ogr.GetDriverByName('ESRI Shapefile')
